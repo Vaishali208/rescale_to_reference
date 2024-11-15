@@ -1,0 +1,46 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                              count
+-----------------------------  -------
+adjust_reference_distribution        1
+all                                  1
+calculate_max_fragment_length        1
+plot_graph                           1
+total                                4
+
+Select jobs to execute...
+
+[Sun Nov  3 11:12:17 2024]
+rule calculate_max_fragment_length:
+    input: shuf.a.bed.gz
+    output: data/max_fragment_length.txt
+    jobid: 3
+    reason: Missing output files: data/max_fragment_length.txt
+    resources: tmpdir=/tmp
+
+[Sun Nov  3 11:12:47 2024]
+Error in rule calculate_max_fragment_length:
+    jobid: 3
+    input: shuf.a.bed.gz
+    output: data/max_fragment_length.txt
+    shell:
+        
+        # Calculate the maximum fragment length in one line, using pipes
+        zcat shuf.a.bed.gz | awk '{print $3 - $2}' | sort -nr | head -n 1 > data/max_fragment_length.txt
+            
+        # Verify that output was generated
+        if [ ! -s data/max_fragment_length.txt ]; then
+            echo "Error: No output generated in data/max_fragment_length.txt" >&2
+            exit 1
+        fi
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job calculate_max_fragment_length since they might be corrupted:
+data/max_fragment_length.txt
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-11-03T111216.435407.snakemake.log

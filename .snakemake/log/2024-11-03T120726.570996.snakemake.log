@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+all               1
+plot_graph        1
+total             2
+
+Select jobs to execute...
+
+[Sun Nov  3 12:07:26 2024]
+rule plot_graph:
+    input: shuf.a.bed.gz, data/adjusted_reference.hist
+    output: distribution_plot.png
+    jobid: 1
+    reason: Missing output files: distribution_plot.png
+    resources: tmpdir=/tmp
+
+[Sun Nov  3 12:07:33 2024]
+Error in rule plot_graph:
+    jobid: 1
+    input: shuf.a.bed.gz, data/adjusted_reference.hist
+    output: distribution_plot.png
+
+RuleException:
+CalledProcessError in file /home/bec51320.iitr/~workplace/rescale_to_reference/snakefile, line 41:
+Command 'set -euo pipefail;  /home/bec51320.iitr/miniconda3/envs/snakemake_env/bin/python3.8 '/home/bec51320.iitr/~workplace/rescale_to_reference/.snakemake/scripts/tmpfhfgn2ed.plot_graph.py'' returned non-zero exit status 1.
+  File "/home/bec51320.iitr/~workplace/rescale_to_reference/snakefile", line 41, in __rule_plot_graph
+  File "/home/bec51320.iitr/miniconda3/envs/snakemake_env/lib/python3.8/concurrent/futures/thread.py", line 57, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-11-03T120726.570996.snakemake.log

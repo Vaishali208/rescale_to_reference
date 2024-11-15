@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in line 14 of /home/bec51320.iitr/~workplace/rescale_to_reference/snakefile:
+Missing input files for rule calculate_max_fragment_length:
+    output: data/max_fragment_length.txt
+    affected files:
+        data/shuf.a.bed.gz
